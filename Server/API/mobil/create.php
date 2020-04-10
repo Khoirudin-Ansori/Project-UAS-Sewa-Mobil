@@ -17,7 +17,6 @@ $data =
 json_decode (file_get_contents("php://input"));
 
 if(
-	!empty($data->id_mobil) &&
 	!empty($data->nama_mobil) &&
 	!empty($data->merk_mobil) &&
 	!empty($data->tahun_mobil) &&
@@ -26,8 +25,6 @@ if(
 	!empty($data->warna_mobil) &&
 	!empty($data->plat_no_mobil)
 ){
-	
-	$mobil->id_mobil = $data->id_mobil;
 	$mobil->nama_mobil = $data->nama_mobil;
 	$mobil->merk_mobil = $data->merk_mobil;
 	$mobil->tahun_mobil = $data->tahun_mobil;
@@ -36,7 +33,7 @@ if(
 	$mobil->warna_mobil = $data->warna_mobil;
 	$mobil->plat_no_mobil = $data->plat_no_mobil;
 
-	if ($admin -> create()) {
+	if ($mobil -> create()) {
 		http_response_code(201);
 		echo json_encode(array("Message" => "mobil was created" ));
 	}
