@@ -17,15 +17,14 @@ $data =
 json_decode (file_get_contents("php://input"));
 
 if(
-	!empty($data->id_gallery) &&
+	
 	!empty($data->id_mobil) &&
 	!empty($data->image)
 ){
-	$admin->id_gallery = $data->id_gallery;
-	$admin->id_mobil = $data->id_mobil;
-	$admin->image = $data->image;
+	$gallery_mobil->id_mobil = $data->id_mobil;
+	$gallery_mobil->image = $data->image;
 
-	if ($admin -> create()) {
+	if ($gallery_mobil -> create()) {
 		http_response_code(201);
 		echo json_encode(array("Message" => "gallery_mobil was created" ));
 	}
