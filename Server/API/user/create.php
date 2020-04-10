@@ -38,7 +38,7 @@ if(
 	$user->alamat = $data->alamat;
 	$user->password = $data->password;
 
-	if ($admin -> create()) {
+	if ($user -> create()) {
 		http_response_code(201);
 		echo json_encode(array("Message" => "user was created" ));
 	}
