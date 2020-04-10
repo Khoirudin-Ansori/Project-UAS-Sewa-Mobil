@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 09 Apr 2020 pada 10.55
+-- Waktu pembuatan: 09 Apr 2020 pada 15.57
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.4.1
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `db_rentalmobil_v2`
+-- Database: `db_rentalmobil3`
 --
 
 DELIMITER $$
@@ -35,61 +35,20 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_denda`
---
-
-CREATE TABLE `tb_denda` (
-  `ID_DENDA` int(11) NOT NULL,
-  `ID_DETAIL_TRANSAKSI` int(11) DEFAULT NULL,
-  `JUMLAH_HARI` int(11) DEFAULT NULL,
-  `TOTAL_DENDA` decimal(10,0) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `tb_detail_transaksi`
---
-
-CREATE TABLE `tb_detail_transaksi` (
-  `ID_DETAIL_TRANSAKSI` int(11) NOT NULL,
-  `KODE_TRANSAKSI` varchar(125) DEFAULT NULL,
-  `ID_MOBIL` int(11) DEFAULT NULL,
-  `TGL_SEWA` datetime DEFAULT NULL,
-  `TGL_AKHIR_PENYEWAAN` datetime DEFAULT NULL,
-  `TGL_PENGEMBALIAN` datetime DEFAULT NULL,
-  `HARGA_MOBIL` decimal(10,0) DEFAULT NULL,
-  `DENDA` decimal(10,0) DEFAULT NULL,
-  `TOTAL` decimal(10,0) DEFAULT NULL,
-  `STATUS_MOBIL` int(11) DEFAULT NULL,
-  `STATUS` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data untuk tabel `tb_detail_transaksi`
---
-
-INSERT INTO `tb_detail_transaksi` (`ID_DETAIL_TRANSAKSI`, `KODE_TRANSAKSI`, `ID_MOBIL`, `TGL_SEWA`, `TGL_AKHIR_PENYEWAAN`, `TGL_PENGEMBALIAN`, `HARGA_MOBIL`, `DENDA`, `TOTAL`, `STATUS_MOBIL`, `STATUS`) VALUES
-(25, 'TRN-20180202120259-0', 10, '2018-02-02 11:51:00', '2018-02-03 11:51:00', '2018-02-02 18:57:30', '800000', '0', '800000', 2, 3),
-(26, 'TRN-20180202120205-1', 5, '2018-02-03 18:53:00', '2018-02-04 18:53:00', '2018-02-02 18:57:37', '250000', '0', '250000', 2, 3);
-
--- --------------------------------------------------------
-
---
 -- Struktur dari tabel `tb_gallery_mobil`
 --
 
 CREATE TABLE `tb_gallery_mobil` (
-  `ID_GALLERY` int(11) NOT NULL,
-  `ID_MOBIL` int(11) DEFAULT NULL,
-  `IMAGE` text DEFAULT NULL
+  `id_gallery` int(11) NOT NULL,
+  `id_mobil` int(11) DEFAULT NULL,
+  `image` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `tb_gallery_mobil`
 --
 
-INSERT INTO `tb_gallery_mobil` (`ID_GALLERY`, `ID_MOBIL`, `IMAGE`) VALUES
+INSERT INTO `tb_gallery_mobil` (`id_gallery`, `id_mobil`, `image`) VALUES
 (10, 7, '20180103162810.jpg'),
 (11, 6, '20180103162819.jpg'),
 (13, 8, '20180115063621.jpg'),
@@ -106,21 +65,21 @@ INSERT INTO `tb_gallery_mobil` (`ID_GALLERY`, `ID_MOBIL`, `IMAGE`) VALUES
 --
 
 CREATE TABLE `tb_mobil` (
-  `ID_MOBIL` int(11) NOT NULL,
-  `NAMA_MOBIL` varchar(225) DEFAULT NULL,
-  `MERK_MOBIL` varchar(225) DEFAULT NULL,
-  `TAHUN_MOBIL` varchar(4) DEFAULT NULL,
-  `KAPASITAS_MOBIL` int(11) DEFAULT NULL,
-  `HARGA_MOBIL` decimal(10,0) DEFAULT NULL,
-  `WARNA_MOBIL` varchar(50) DEFAULT NULL,
-  `PLAT_NO_MOBIL` varchar(25) DEFAULT NULL
+  `id_mobil` int(11) NOT NULL,
+  `nama_mobil` varchar(225) DEFAULT NULL,
+  `merk_mobil` varchar(225) DEFAULT NULL,
+  `tahun_mobil` varchar(4) DEFAULT NULL,
+  `kapasitas_mobil` int(11) DEFAULT NULL,
+  `harga_mobil` decimal(10,0) DEFAULT NULL,
+  `warna_mobil` varchar(50) DEFAULT NULL,
+  `plat_no_mobil` varchar(25) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `tb_mobil`
 --
 
-INSERT INTO `tb_mobil` (`ID_MOBIL`, `NAMA_MOBIL`, `MERK_MOBIL`, `TAHUN_MOBIL`, `KAPASITAS_MOBIL`, `HARGA_MOBIL`, `WARNA_MOBIL`, `PLAT_NO_MOBIL`) VALUES
+INSERT INTO `tb_mobil` (`id_mobil`, `nama_mobil`, `merk_mobil`, `tahun_mobil`, `kapasitas_mobil`, `harga_mobil`, `warna_mobil`, `plat_no_mobil`) VALUES
 (5, 'Avanza Veloz New Editon', 'Toyota', '2017', 5, '250000', 'fff', 'D 4414 TU'),
 (6, 'Toyota Rush White', 'TOYOTA', '2017', 10, '200000', 'MERAH', 'D FGH17 D'),
 (7, 'Lamborgini Really', 'Lamborgini', '2015', 5, '500000', 'Hitam', 'F 5034 UA'),
@@ -165,7 +124,7 @@ DELIMITER ;
 
 CREATE TABLE `tb_mobil_activity` (
   `act_id` int(11) NOT NULL,
-  `NAMA_MOBIL` varchar(30) DEFAULT NULL,
+  `nama_mobil` varchar(30) DEFAULT NULL,
   `action` varchar(30) DEFAULT NULL,
   `time` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -174,7 +133,7 @@ CREATE TABLE `tb_mobil_activity` (
 -- Dumping data untuk tabel `tb_mobil_activity`
 --
 
-INSERT INTO `tb_mobil_activity` (`act_id`, `NAMA_MOBIL`, `action`, `time`) VALUES
+INSERT INTO `tb_mobil_activity` (`act_id`, `nama_mobil`, `action`, `time`) VALUES
 (1, 'Corolla', 'INS ', '2020-03-10 17:46:50'),
 (2, 'Brio', 'INS ', '2020-03-10 17:49:40'),
 (3, 'Jazz', 'INS ', '2020-03-10 17:51:34'),
@@ -189,7 +148,7 @@ INSERT INTO `tb_mobil_activity` (`act_id`, `NAMA_MOBIL`, `action`, `time`) VALUE
 
 CREATE TABLE `tb_mobil_log` (
   `log_id` int(11) NOT NULL,
-  `NAMA_MOBIL` varchar(30) DEFAULT NULL,
+  `nama_mobil` varchar(30) DEFAULT NULL,
   `added_on` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -197,7 +156,7 @@ CREATE TABLE `tb_mobil_log` (
 -- Dumping data untuk tabel `tb_mobil_log`
 --
 
-INSERT INTO `tb_mobil_log` (`log_id`, `NAMA_MOBIL`, `added_on`) VALUES
+INSERT INTO `tb_mobil_log` (`log_id`, `nama_mobil`, `added_on`) VALUES
 (1, 'Corolla', '2020-03-10 17:46:50'),
 (2, 'Brio', '2020-03-10 17:49:40'),
 (3, 'Jazz', '2020-03-10 17:51:34'),
@@ -211,21 +170,21 @@ INSERT INTO `tb_mobil_log` (`log_id`, `NAMA_MOBIL`, `added_on`) VALUES
 --
 
 CREATE TABLE `tb_transaksi` (
-  `KODE_TRANSAKSI` varchar(125) NOT NULL,
-  `ID_USER` int(11) DEFAULT NULL,
-  `TGL_ORDER` datetime DEFAULT NULL,
-  `TOTAL_PEMBAYARAN` decimal(10,0) DEFAULT NULL,
-  `TGL_PEMBAYARAN` datetime DEFAULT NULL,
-  `BUKTI_PEMBAYARAN` text DEFAULT NULL,
-  `STATUS_PEMBAYARAN` int(11) DEFAULT NULL,
-  `STATUS_TRANSAKSI` int(11) DEFAULT NULL
+  `kode_transaksi` varchar(125) NOT NULL,
+  `id_user` int(11) DEFAULT NULL,
+  `tgl_order` datetime DEFAULT NULL,
+  `total_pembayaran` decimal(10,0) DEFAULT NULL,
+  `tgl_pembayaran` datetime DEFAULT NULL,
+  `bukti_pembayaran` text DEFAULT NULL,
+  `status_pembayaran` int(11) DEFAULT NULL,
+  `status_transaksi` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `tb_transaksi`
 --
 
-INSERT INTO `tb_transaksi` (`KODE_TRANSAKSI`, `ID_USER`, `TGL_ORDER`, `TOTAL_PEMBAYARAN`, `TGL_PEMBAYARAN`, `BUKTI_PEMBAYARAN`, `STATUS_PEMBAYARAN`, `STATUS_TRANSAKSI`) VALUES
+INSERT INTO `tb_transaksi` (`kode_transaksi`, `id_user`, `tgl_order`, `total_pembayaran`, `tgl_pembayaran`, `bukti_pembayaran`, `status_pembayaran`, `status_transaksi`) VALUES
 ('TRN-20180202120205-1', 12, '2018-02-02 12:02:05', '250000', '2018-02-02 18:56:01', NULL, 1, 3),
 ('TRN-20180202120259-0', 38, '2018-02-02 12:02:59', '800000', '2018-02-02 18:55:56', NULL, 1, 3);
 
@@ -236,28 +195,28 @@ INSERT INTO `tb_transaksi` (`KODE_TRANSAKSI`, `ID_USER`, `TGL_ORDER`, `TOTAL_PEM
 --
 
 CREATE TABLE `tb_users` (
-  `ID_USER` int(11) NOT NULL,
-  `USERNAME` varchar(225) DEFAULT NULL,
-  `NAME` varchar(225) NOT NULL,
-  `NIK` varchar(30) NOT NULL,
-  `EMAIL` varchar(225) DEFAULT NULL,
-  `NO_TELP` varchar(20) DEFAULT NULL,
-  `JENIS_KELAMIN` char(1) DEFAULT NULL,
-  `ALAMAT` text DEFAULT NULL,
-  `PASSWORD` text DEFAULT NULL,
-  `PHOTO` text DEFAULT NULL,
-  `ACTIVATED` int(11) DEFAULT NULL,
-  `CREATED` datetime DEFAULT NULL,
-  `GROUP_USER` int(11) DEFAULT NULL,
-  `LAST_LOGIN` datetime DEFAULT NULL,
-  `LAST_UPDATE` datetime DEFAULT NULL
+  `id_user` int(11) NOT NULL,
+  `username` varchar(225) DEFAULT NULL,
+  `name` varchar(225) NOT NULL,
+  `nik` varchar(30) NOT NULL,
+  `email` varchar(225) DEFAULT NULL,
+  `no_telp` varchar(20) DEFAULT NULL,
+  `jenis_kelamin` char(1) DEFAULT NULL,
+  `alamat` text DEFAULT NULL,
+  `password` text DEFAULT NULL,
+  `photo` text DEFAULT NULL,
+  `activated` int(11) DEFAULT NULL,
+  `created` datetime DEFAULT NULL,
+  `group_user` int(11) DEFAULT NULL,
+  `last_login` datetime DEFAULT NULL,
+  `last_update` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `tb_users`
 --
 
-INSERT INTO `tb_users` (`ID_USER`, `USERNAME`, `NAME`, `NIK`, `EMAIL`, `NO_TELP`, `JENIS_KELAMIN`, `ALAMAT`, `PASSWORD`, `PHOTO`, `ACTIVATED`, `CREATED`, `GROUP_USER`, `LAST_LOGIN`, `LAST_UPDATE`) VALUES
+INSERT INTO `tb_users` (`id_user`, `username`, `name`, `nik`, `email`, `no_telp`, `jenis_kelamin`, `alamat`, `password`, `photo`, `activated`, `created`, `group_user`, `last_login`, `last_update`) VALUES
 (12, 'user', 'User', '636382826326', 'user@gmail.com', '08574737373737', 'L', 'bandung', 'ee11cbb19052e40b07aac0ca060c23ee', '151757238620180202125306.jpg', 1, '2018-01-15 08:14:45', 2, NULL, '2018-02-02 12:53:06'),
 (38, 'admin', 'Administrator', '6362552527278', 'admin@gmail.com', '0857272737273', 'L', 'bandung', '21232f297a57a5a743894a0e4a801fc3', '151757223820180202125038.jpg', 1, '2018-02-02 12:31:47', 1, '2018-02-02 12:50:38', '2018-02-02 12:50:38'),
 (39, 'iye', 'iye', '183140714111042', NULL, NULL, NULL, NULL, 'iye', NULL, NULL, NULL, NULL, NULL, NULL);
@@ -267,32 +226,17 @@ INSERT INTO `tb_users` (`ID_USER`, `USERNAME`, `NAME`, `NIK`, `EMAIL`, `NO_TELP`
 --
 
 --
--- Indeks untuk tabel `tb_denda`
---
-ALTER TABLE `tb_denda`
-  ADD PRIMARY KEY (`ID_DENDA`),
-  ADD KEY `FK_RELATIONSHIP_7` (`ID_DETAIL_TRANSAKSI`);
-
---
--- Indeks untuk tabel `tb_detail_transaksi`
---
-ALTER TABLE `tb_detail_transaksi`
-  ADD PRIMARY KEY (`ID_DETAIL_TRANSAKSI`),
-  ADD KEY `FK_RELATIONSHIP_2` (`KODE_TRANSAKSI`),
-  ADD KEY `FK_RELATIONSHIP_5` (`ID_MOBIL`);
-
---
 -- Indeks untuk tabel `tb_gallery_mobil`
 --
 ALTER TABLE `tb_gallery_mobil`
-  ADD PRIMARY KEY (`ID_GALLERY`),
-  ADD KEY `FK_RELATIONSHIP_6` (`ID_MOBIL`);
+  ADD PRIMARY KEY (`id_gallery`),
+  ADD KEY `FK_RELATIONSHIP_6` (`id_mobil`);
 
 --
 -- Indeks untuk tabel `tb_mobil`
 --
 ALTER TABLE `tb_mobil`
-  ADD PRIMARY KEY (`ID_MOBIL`);
+  ADD PRIMARY KEY (`id_mobil`);
 
 --
 -- Indeks untuk tabel `tb_mobil_activity`
@@ -310,42 +254,30 @@ ALTER TABLE `tb_mobil_log`
 -- Indeks untuk tabel `tb_transaksi`
 --
 ALTER TABLE `tb_transaksi`
-  ADD PRIMARY KEY (`KODE_TRANSAKSI`),
-  ADD KEY `FK_RELATIONSHIP_1` (`ID_USER`);
+  ADD PRIMARY KEY (`kode_transaksi`),
+  ADD KEY `FK_RELATIONSHIP_1` (`id_user`);
 
 --
 -- Indeks untuk tabel `tb_users`
 --
 ALTER TABLE `tb_users`
-  ADD PRIMARY KEY (`ID_USER`);
+  ADD PRIMARY KEY (`id_user`);
 
 --
 -- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT untuk tabel `tb_denda`
---
-ALTER TABLE `tb_denda`
-  MODIFY `ID_DENDA` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT untuk tabel `tb_detail_transaksi`
---
-ALTER TABLE `tb_detail_transaksi`
-  MODIFY `ID_DETAIL_TRANSAKSI` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
-
---
 -- AUTO_INCREMENT untuk tabel `tb_gallery_mobil`
 --
 ALTER TABLE `tb_gallery_mobil`
-  MODIFY `ID_GALLERY` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id_gallery` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_mobil`
 --
 ALTER TABLE `tb_mobil`
-  MODIFY `ID_MOBIL` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id_mobil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_mobil_activity`
@@ -363,24 +295,11 @@ ALTER TABLE `tb_mobil_log`
 -- AUTO_INCREMENT untuk tabel `tb_users`
 --
 ALTER TABLE `tb_users`
-  MODIFY `ID_USER` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
-
---
--- Ketidakleluasaan untuk tabel `tb_denda`
---
-ALTER TABLE `tb_denda`
-  ADD CONSTRAINT `FK_RELATIONSHIP_7` FOREIGN KEY (`ID_DETAIL_TRANSAKSI`) REFERENCES `tb_detail_transaksi` (`ID_DETAIL_TRANSAKSI`);
-
---
--- Ketidakleluasaan untuk tabel `tb_detail_transaksi`
---
-ALTER TABLE `tb_detail_transaksi`
-  ADD CONSTRAINT `FK_RELATIONSHIP_2` FOREIGN KEY (`KODE_TRANSAKSI`) REFERENCES `tb_transaksi` (`KODE_TRANSAKSI`),
-  ADD CONSTRAINT `FK_RELATIONSHIP_5` FOREIGN KEY (`ID_MOBIL`) REFERENCES `tb_mobil` (`ID_MOBIL`);
 
 --
 -- Ketidakleluasaan untuk tabel `tb_gallery_mobil`
