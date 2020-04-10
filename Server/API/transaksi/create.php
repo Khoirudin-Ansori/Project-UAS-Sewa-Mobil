@@ -17,7 +17,6 @@ $data =
 json_decode (file_get_contents("php://input"));
 
 if(
-	!empty($data->kode_transaksi) &&
 	!empty($data->id_user) &&
 	!empty($data->tgl_order) &&
 	!empty($data->total_pembayaran) &&
@@ -26,8 +25,6 @@ if(
 	!empty($data->status_pembayaran) &&
 	!empty($data->status_transaksi)
 ){
-	
-	$transaksi->kode_transaksi = $data->kode_transaksi;
 	$transaksi->id_user = $data->id_user;
 	$transaksi->tgl_order = $data->tgl_order;
 	$transaksi->total_pembayaran = $data->total_pembayaran;
@@ -38,16 +35,16 @@ if(
 
 	if ($admin -> create()) {
 		http_response_code(201);
-		echo json_encode(array("Message" => "mobil was created" ));
+		echo json_encode(array("Message" => "user was created" ));
 	}
 	else{
 		http_response_code(503);
-		echo json_encode(array("Message" => "Unable to create mobil" ));
+		echo json_encode(array("Message" => "Unable to create user" ));
 	}
 }
 else{
 	http_response_code(400);
-	echo json_encode(array("Message" => "Unable to create mobil. Data is incomplete"));
+	echo json_encode(array("Message" => "Unable to create user. Data is incomplete"));
 }
 
 ?>
