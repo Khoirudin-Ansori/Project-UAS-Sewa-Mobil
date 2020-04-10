@@ -33,18 +33,18 @@ if(
 	$transaksi->status_pembayaran = $data->status_pembayaran;
 	$transaksi->status_transaksi = $data->status_transaksi;
 
-	if ($admin -> create()) {
+	if ($transaksi -> create()) {
 		http_response_code(201);
-		echo json_encode(array("Message" => "user was created" ));
+		echo json_encode(array("Message" => "transaksi was created" ));
 	}
 	else{
 		http_response_code(503);
-		echo json_encode(array("Message" => "Unable to create user" ));
+		echo json_encode(array("Message" => "Unable to create transaksi" ));
 	}
 }
 else{
 	http_response_code(400);
-	echo json_encode(array("Message" => "Unable to create user. Data is incomplete"));
+	echo json_encode(array("Message" => "Unable to create transaksi. Data is incomplete"));
 }
 
 ?>
